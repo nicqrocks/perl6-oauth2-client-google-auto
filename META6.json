@@ -13,7 +13,9 @@
   ],
   "auth": "github:nicqrocks",
   "depends": [
-    "OAuth2::Client::Google"
+    "OAuth2::Client::Google",
+    "JSON::Fast",
+    "HTTP::UserAgent"
   ],
   "tags": [
 
