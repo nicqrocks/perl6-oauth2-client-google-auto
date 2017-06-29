@@ -1,0 +1,35 @@
+{
+  "name": "OAuth2::Client::Google::Auto",
+  "source-url": "https://github.com/nicqrocks/perl6-oauth2-client-google-auto.git",
+  "support": {
+    "source": null
+  },
+  "perl": "6.c",
+  "resources": [
+
+  ],
+  "build-depends": [
+
+  ],
+  "auth": "github:nicqrocks",
+  "depends": [
+    "OAuth2::Client::Google"
+  ],
+  "tags": [
+
+  ],
+  "license": "Artistic 2.0",
+  "test-depends": [
+    "Test::META"
+  ],
+  "provides": {
+
+  },
+  "production": false,
+  "version": "0.0.1",
+  "authors": [
+    "Nic Q <nicq20@gmail.com>"
+  ],
+  "description": "Automatically run through the authentication process for google.",
+  "meta6": "0"
+}
