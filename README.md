@@ -10,7 +10,8 @@ The module is primarily designed to be easy to use (that was the whole point of 
 
     use GAuth:Auto;
     use JSON::Fast;
-    my $gauth = from-json("gauth.json".IO.slurp);
+
+    my $gauth = auto-auth "email other-scope";  #Returns a hash
     my $token = $gauth<access_token>;
 
 This expects that the `client_id.json` file is in the `$*CWD` and that the machine this is running on has a web browser available. For more complex examples, please see the [`examples`](example) directory.
