@@ -12,7 +12,7 @@ The module is primarily designed to be easy to use (that was the whole point of 
     use JSON::Fast;
     my $oauth = OAuth2::Client::Google.new: |from-json("gauth.json".IO.slurp);
 
-This expects that the `client_id.json` file is in the `$*CWD` and that the machine this is running on has a web browser available. For more complex examples, please see the [`examples`](/example) directory.
+This expects that the `client_id.json` file is in the `$*CWD` and that the machine this is running on has a web browser available. For more complex examples, please see the [`examples`](example) directory.
 
 ## Restrictions
 
