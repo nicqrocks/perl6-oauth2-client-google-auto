@@ -6,11 +6,12 @@ Google's authentication takes a while to write, so why not automate it? This mod
 
 ## How it Works
 
-The module is primarily designed to be easy to use (that was the whole point of making it). To do so, this module will write a file called `gauth.json` in the current directory. So the simplest way to get it to work, is like this:
+The module is primarily designed to be easy to use (that was the whole point of making it). To do so, this module will write a file called `gauth.json` in the current directory. This JSON file holds the tokens returned from Google. So the simplest way to get it to work, is like this:
 
     use GAuth:Auto;
     use JSON::Fast;
-    my $oauth = OAuth2::Client::Google.new: |from-json("gauth.json".IO.slurp);
+    my $gauth = from-json("gauth.json".IO.slurp);
+    my $token = $gauth<access_token>;
 
 This expects that the `client_id.json` file is in the `$*CWD` and that the machine this is running on has a web browser available. For more complex examples, please see the [`examples`](example) directory.
 
