@@ -27,3 +27,7 @@ In order for this or the `OAuth2::Client::Google` module to work, a JSON file of
 ### No Web Browser
 
 Due to Google being so web based, the authentication page for the user is a link returned by the request. This is a module however, and there is no guarantee that the machine has a web browser. So to get around this, a link to the authentication page will be returned instead.
+
+## Credit
+
+All credit for this should go to [bduggan](https://github.com/bduggan) as this module is basically his example script placed into a function.

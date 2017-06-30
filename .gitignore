@@ -1,4 +1,5 @@
 .precomp
+client_id.json
 *.swp
 *.bak
 *~
