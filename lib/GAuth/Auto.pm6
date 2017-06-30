@@ -2,7 +2,6 @@
 
 use OAuth2::Client::Google;
 use JSON::Fast;
-use HTTP::UserAgent;
 
 sub auto-auth(
     Str $scope,
@@ -11,9 +10,9 @@ sub auto-auth(
 ) is export {
     #Get the browser.
     my $browser = %*ENV<BROWSER>    ||
-    qx{which xdg-open}          ||
-    qx{which x-www-browser}     ||
-    qx{which open};
+        qx{which xdg-open}          ||
+        qx{which x-www-browser}     ||
+        qx{which open};
     $browser .= chomp;
 
     #Get the config from the JSON file.
@@ -28,7 +27,9 @@ sub auto-auth(
     my $path = $<path> // '/';
 
     #Make OAuth2 object.
-    my $oauth = OAuth2::Client::Google.new: :$config, :$scope,
+    my $oauth = OAuth2::Client::Google.new:
+        :$config,
+        :$scope,
         redirect-uri => $uri;
 
     #Open the browser or run the code that was passed.
@@ -46,7 +47,7 @@ sub auto-auth(
     END
 
     my $in;
-    my $done;
+    my $done = Promise.new;
     my $sock = IO::Socket::Async.listen('localhost', $port);
     $sock.tap( -> $connection {
         $connection.Supply.tap( -> $str {
@@ -54,22 +55,22 @@ sub auto-auth(
             if $str ~~ /\r\n\r\n/ {
                 $connection.write($res);
                 $connection.close;
-                $done = True;
+                $done.keep;
             }
           });
     });
-    loop { last if $done; };
-
     say "Alive1";
+    await $done;
+
     #Get the code that was returned.
+    say "Alive2";
     $in ~~ / 'GET' .* 'code=' $<code>=(<-[&]>+) /;
     my $code = $<code> or die "No code given";
 
-    say "Alive2";
     #Get the identity and return the access token hash.
+    say "Alive3";
     my $token = $oauth.code-to-token(:$code);
     my $id = $oauth.verify-id: id-token => $token<id_token>;
 
-    say "Alive3";
     return $token;
 }

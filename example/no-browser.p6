@@ -13,7 +13,7 @@ my $last = "gauth.json".IO;
 unless $last.e {
     use GAuth::Auto;
     #Must give a space delimited list of scopes.
-    auto-auth "email",
+    my $t = auto-auth "email",
         #File to use other than "client_id.json".
         with => "client_id.json".IO,
         #Thing to do when given the URL. This replaces trying to open the
@@ -21,6 +21,8 @@ unless $last.e {
         :no-browser( -> $l {
             say "Open this URL: $l";
         } );
+
+    $last.spurt: to-json $t;
 }
 
 #Load the saved authentication file into an object;
